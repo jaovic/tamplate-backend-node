@@ -13,4 +13,6 @@ export interface IAuthRepository {
   findByEmail(email: string): Promise<User | null>;
   updateRefreshToken(userId: string, refreshToken: string): Promise<boolean>;
   updateToken(userId: string, token: string): Promise<boolean>;
+  logout(userId: string): Promise<boolean>;
+  findById(userId: string): Promise<Partial<User> | null>;
 }

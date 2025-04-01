@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 
-export interface IcreateUser {
+export interface IRegisterUser {
   name: string;
   email: string;
   password: string;
@@ -8,41 +8,51 @@ export interface IcreateUser {
   phone: string;
 }
 
-export interface IRefreshTokenReturn {
+export interface IGetTokenRetun {
   token: string;
   refreshToken: string;
 }
 
-export interface IGetTokenRetun {
-  token: string;
-  refreshToken: string;
+export interface IGetToken {
+  userId: string;
+  email: string;
 }
 
 export interface ILoginReturn {
   token: string;
   refreshToken: string;
 }
-export interface ICreateUserService {
-  execute(data: IcreateUser): Promise<Partial<User>>;
+
+export interface ILoginUser {
+  email: string;
+  password: string;
+}
+
+export interface IGenerateToken {
+  email: string;
+  password: string;
+}
+
+export interface IGenerateTokenRetun {
+  token: string;
+  refreshToken: string;
+}
+
+export interface IRegisterService {
+  execute(registerUser: IRegisterUser): Promise<Partial<User>>;
 }
 export interface IGetTokenService {
-  execute(id: string, email: string): Promise<IGetTokenRetun>;
+  execute(getToken: IGetToken): Promise<IGetTokenRetun>;
 }
-export interface ILoginUserService {
-  execute(user: any): Promise<ILoginReturn>;
+
+export interface ILoginService {
+  execute(dataLogin: ILoginUser): Promise<true | null>;
 }
-export interface ILogoutUserService {
-  execute(id: string): Promise<true>;
+
+export interface IGenerateTokenService {
+  execute(generateToken: IGenerateToken): Promise<IGenerateTokenRetun>;
 }
-export interface IRefreshTokenService {
-  execute(req: any): Promise<IRefreshTokenReturn>;
-}
-export interface IValidateUserService {
-  execute(email: string, password: string): Promise<true>;
-}
-export interface IVerifyCodeService {
-  execute(email: string, code: string): Promise<true>;
-}
-export interface IVerifyTokenService {
-  execute(req: any): Promise<IRefreshTokenReturn>;
+
+export interface ILogoutService {
+  execute(userId: string): Promise<boolean>;
 }

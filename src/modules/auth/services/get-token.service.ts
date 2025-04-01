@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthRepository } from '../repository/auth.repository';
 import {
+  IGetToken,
   IGetTokenRetun,
   IGetTokenService,
 } from '../structure/IService.structure';
@@ -12,9 +13,11 @@ export class GetTokenService implements IGetTokenService {
   constructor(
     @Inject(AuthRepository)
     private readonly authRepository: IAuthRepository,
+    @Inject(JwtService)
     private readonly jwtService: JwtService,
   ) {}
-  async execute(userId: string, email: string): Promise<IGetTokenRetun> {
+  async execute(getToken: IGetToken): Promise<IGetTokenRetun> {
+    const { userId, email } = getToken;
     const payload = { sub: userId, email: email };
     const [token, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload),

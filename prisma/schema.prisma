@@ -14,10 +14,10 @@ model User {
   password      String    @db.VarChar(255)
   phone         String    @unique @db.VarChar(50)
   cpf           String    @unique @db.VarChar(50)
-  token         String    @unique @default("null")
-  Refresh_Token String    @unique @default("null")
+  token         String?   @unique
+  Refresh_Token String?   @unique
   isVerified    Boolean   @default(false)
-  codeSms       String    @default("null")
+  codeSms       String?   @db.VarChar(20)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   deletedAt     DateTime?

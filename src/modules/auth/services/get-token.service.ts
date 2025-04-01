@@ -22,7 +22,7 @@ export class GetTokenService implements IGetTokenService {
     const [token, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload),
       this.jwtService.signAsync(payload, {
-        secret: process.env.REFRESH_TOKEN_SECRET,
+        secret: process.env.JWT_SECRET,
         expiresIn: '15m',
       }),
     ]);

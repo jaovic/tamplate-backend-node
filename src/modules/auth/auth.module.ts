@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { RegisterService } from './services/register.service';
 import { AuthController } from './auth.controller';
-import { UserService } from 'src/modules/user/user.service';
 import { AuthRepository } from './repository/auth.repository';
 import { PrismaService } from 'src/prisma.service';
 import { LocalStrategy } from './guards/local.strategy';
@@ -12,6 +11,7 @@ import { JwtStrategy } from './guards/jwt.strategy';
 import { LogoutUserService } from './services/logout.service';
 import { GenerateTokenService } from './services/generate-token.service';
 import { TwilioService } from '../twilio/twilio.service';
+import { VerifyCodeService } from './services/verify-code.service';
 
 @Module({
   imports: [
@@ -23,7 +23,6 @@ import { TwilioService } from '../twilio/twilio.service';
   controllers: [AuthController],
   providers: [
     RegisterService,
-    UserService,
     AuthRepository,
     PrismaService,
     LocalStrategy,
@@ -33,6 +32,7 @@ import { TwilioService } from '../twilio/twilio.service';
     LogoutUserService,
     GenerateTokenService,
     TwilioService,
+    VerifyCodeService,
   ],
 })
 export class AuthModule {}

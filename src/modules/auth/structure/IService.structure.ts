@@ -38,6 +38,11 @@ export interface IGenerateTokenRetun {
   refreshToken: string;
 }
 
+export interface IVerifyCode {
+  email: string;
+  codeSms: string;
+}
+
 export interface IRegisterService {
   execute(registerUser: IRegisterUser): Promise<Partial<User>>;
 }
@@ -55,4 +60,8 @@ export interface IGenerateTokenService {
 
 export interface ILogoutService {
   execute(userId: string): Promise<boolean>;
+}
+
+export interface IVerifyCodeService {
+  execute(verifyCode: IVerifyCode): Promise<boolean>;
 }

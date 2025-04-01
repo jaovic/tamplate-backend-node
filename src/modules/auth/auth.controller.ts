@@ -17,6 +17,8 @@ import { RegisterService } from './services/register.service';
 import { LogoutUserService } from './services/logout.service';
 import { AuthenticatedUser } from './dto/auth-request.dto';
 import { GenerateTokenService } from './services/generate-token.service';
+import { verifyCodeAuthDto } from './dto/verify-code.dto';
+import { VerifyCodeService } from './services/verify-code.service';
 
 @Controller('auth')
 export class AuthController {
@@ -27,6 +29,8 @@ export class AuthController {
     private readonly generateTokenService: GenerateTokenService,
     @Inject(LogoutUserService)
     private readonly logoutUserService: LogoutUserService,
+    @Inject(VerifyCodeService)
+    private readonly verifyCodeService: VerifyCodeService,
   ) {}
 
   @HttpCode(HttpStatus.OK)
@@ -45,5 +49,10 @@ export class AuthController {
   @Post('logout')
   logout(@Req() req: AuthenticatedUser): Promise<boolean> {
     return this.logoutUserService.execute(req.user.userId);
+  }
+
+  @Post('verify-code')
+  async verifyCode(@Body() verifyCode: verifyCodeAuthDto) {
+    return await this.verifyCodeService.execute(verifyCode);
   }
 }

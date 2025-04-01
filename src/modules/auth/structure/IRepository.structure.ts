@@ -15,4 +15,6 @@ export interface IAuthRepository {
   updateToken(userId: string, token: string): Promise<boolean>;
   logout(userId: string): Promise<boolean>;
   findById(userId: string): Promise<Partial<User> | null>;
+  saveCode(userId: string, code: string): Promise<boolean>;
+  updateCode(userId: string, codeSms: string): Promise<boolean>;
 }

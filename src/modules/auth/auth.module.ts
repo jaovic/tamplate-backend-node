@@ -11,6 +11,7 @@ import { LoginService } from './services/login.service';
 import { JwtStrategy } from './guards/jwt.strategy';
 import { LogoutUserService } from './services/logout.service';
 import { GenerateTokenService } from './services/generate-token.service';
+import { TwilioService } from '../twilio/twilio.service';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { GenerateTokenService } from './services/generate-token.service';
     JwtStrategy,
     LogoutUserService,
     GenerateTokenService,
+    TwilioService,
   ],
 })
 export class AuthModule {}

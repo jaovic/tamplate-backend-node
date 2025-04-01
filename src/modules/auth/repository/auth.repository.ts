@@ -78,4 +78,33 @@ export class AuthRepository implements IAuthRepository {
       throw new Error(`Prisma Error: ${error}`);
     }
   }
+
+  async saveCode(userId: string, codeSms: string): Promise<boolean> {
+    try {
+      await this.prisma.user.updateMany({
+        where: { userId },
+        data: { codeSms },
+      });
+      return true;
+    } catch (error) {
+      throw new Error(`Prisma Error: ${error}`);
+    }
+  }
+
+  async updateCode(userId: string): Promise<boolean> {
+    try {
+      await this.prisma.user.updateMany({
+        where: {
+          userId,
+        },
+        data: {
+          codeSms: 'verificated',
+          isVerified: true,
+        },
+      });
+      return true;
+    } catch (error) {
+      throw new Error(`Prisma Error: ${error}`);
+    }
+  }
 }

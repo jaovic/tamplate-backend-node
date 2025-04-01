@@ -24,6 +24,10 @@ export class LoginService implements ILoginService {
       throw new NotFoundException('User not found');
     }
 
+    if (!user.codeSms) {
+      throw new BadRequestException('User not verified');
+    }
+
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {

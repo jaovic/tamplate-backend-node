@@ -8,7 +8,6 @@ import {
 } from '../structure/IService.structure';
 import { IAuthRepository } from '../structure/IRepository.structure';
 import { SingUpAuthDto } from '../dto/create-user.dto';
-import { JwtService } from '@nestjs/jwt';
 import { LoginAuthDto } from '../dto/login-user.dto';
 import { GetTokenService } from './getToken.service';
 
@@ -17,8 +16,6 @@ export class AuthService implements ICreateUserService {
   constructor(
     @Inject(AuthRepository)
     private readonly authRepository: IAuthRepository,
-    @Inject(JwtService)
-    private readonly jwtService: JwtService,
     @Inject(GetTokenService)
     private readonly getTokenService: GetTokenService,
   ) {}
